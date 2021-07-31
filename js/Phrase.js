@@ -8,16 +8,39 @@ class Phrase {
 
     }
 
+/*
+Step 6
+Switch gears for a moment and head to the Phrase class inside the Phrase.js file. 
+Inside the Phrase class, create a method called `addPhraseToDisplay()`.
+This method adds letter placeholders to the display when the game starts. Each letter is
+presented by an empty box, one list item for each letter. See the example_phrase_html.txt 
+file for an example of what the render HTML for a phrase should look like when the game 
+starts, including any `id` or `class` attributes needed. When the player correctly 
+guesses a letter, the empty box is replaced with the matched letter (see the 
+`showMatchedLetter()` method below).
+Make sure the phrase displayed on the screen uses the `letter` CSS class for letters 
+and the `space` CSS class for space.
+*/
+
 
     /**
     * Display phrase on game board
     */
     addPhraseToDisplay() {
         let phraseDisplayHTML = ``;
-        
+        let phraseLetters = [];
+        const ulForLetters = document.getElementById('phrase').firstChild;
+
+        phraseLetters = Array.from(this.phrase);
+        console.log(phraseLetters);
+
         // add each letter in phrase to the div:
-        for(letter in phrase) {
-            document.getElementsByTagName('ul').appendChild(`<li>${letter}</li>`);
+        for(let letter in phraseLetters) {
+            ulForLetters.appendChild(`
+                <li class="hide letter ${letter}">${letter}</li>
+            `);
+            console.log(letter);
         }
+        
     }
 }
