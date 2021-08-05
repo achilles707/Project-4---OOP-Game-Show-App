@@ -29,17 +29,28 @@ and the `space` CSS class for space.
     addPhraseToDisplay() {
         let phraseDisplayHTML = ``;
         let phraseLetters = [];
-        const ulForLetters = document.getElementById('phrase').firstChild;
+        const ulForLetters = document.getElementById('phrase').firstElementChild;
 
         phraseLetters = Array.from(this.phrase);
         console.log(phraseLetters);
 
-        // add each letter in phrase to the div:
+        // add each letter/space in phrase to the div:
         for(let letter in phraseLetters) {
-            ulForLetters.appendChild(`
-                <li class="hide letter ${letter}">${letter}</li>
-            `);
-            console.log(letter);
+            if(letter === ' ') {
+                phraseDisplayHTML = `
+                    <li class="space"> </li>
+                `;
+                ulForLetters.appendChild(phraseDisplayHTML);
+            } else {
+                phraseDisplayHTML = `
+                    <li class="hide letter ${letter}">${letter}</li>
+                `;
+                ulForLetters.appendChild(phraseDisplayHTML);
+                console.log(letter);
+            }
+
+
+            
         }
         
     }
