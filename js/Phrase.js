@@ -36,15 +36,18 @@ and the `space` CSS class for space.
 
         // add each letter/space in phrase to the div:
         for(let letter in phraseLetters) {
+            // creates element depending on if space or letter
             if(letter === ' ') {
                 phraseDisplayHTML = `
                     <li class="space"> </li>
                 `;
+                // adds the new element to the page
                 ulForLetters.appendChild(phraseDisplayHTML);
             } else {
                 phraseDisplayHTML = `
                     <li class="hide letter ${letter}">${letter}</li>
                 `;
+
                 ulForLetters.appendChild(phraseDisplayHTML);
                 console.log(letter);
             }
