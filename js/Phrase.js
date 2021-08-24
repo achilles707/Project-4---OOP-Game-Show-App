@@ -26,35 +26,28 @@ and the `space` CSS class for space.
     /**
     * Display phrase on game board
     */
+
     addPhraseToDisplay() {
-        let phraseDisplayHTML = ``;
         let phraseLetters = [];
         const ulForLetters = document.getElementById('phrase').firstElementChild;
 
         phraseLetters = Array.from(this.phrase);
         console.log(phraseLetters);
 
-        // add each letter/space in phrase to the div:
-        for(let letter in phraseLetters) {
-            // creates element depending on if space or letter
-            if(letter === ' ') {
-                phraseDisplayHTML = `
-                    <li class="space"> </li>
-                `;
-                // adds the new element to the page
+        for(let i = 0; i < phraseLetters.length; i++) {
+            let phraseDisplayHTML = document.createElement('li');
+            console.log(phraseLetters[i]);
+
+            if(phraseLetters[i] === ' ') {
+                phraseDisplayHTML.className = 'space';
+                phraseDisplayHTML.innerHTML = ' ';
                 ulForLetters.appendChild(phraseDisplayHTML);
             } else {
-                phraseDisplayHTML = `
-                    <li class="hide letter ${letter}">${letter}</li>
-                `;
-
+                phraseDisplayHTML.className = `hide letter ${phraseLetters[i]}`;
+                phraseDisplayHTML.innerHTML = `${phraseLetters[i]}`;
                 ulForLetters.appendChild(phraseDisplayHTML);
-                console.log(letter);
             }
-
-
-            
         }
-        
     }
+
 }

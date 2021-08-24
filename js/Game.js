@@ -6,7 +6,7 @@ class Game {
     constructor(phrase) {
         let missed = 0;
         let phrases = [];
-        let acivePhrase = null;
+        let activePhrase = null;
     }
 
     // add phrases to the array
@@ -28,4 +28,14 @@ class Game {
 
         return randomPhrase;
     };    
+
+    /**
+    * Begins game by selecting a random phrase and displaying it to user
+    */
+    startGame() {
+        document.getElementById('overlay').style.display = 'none ';
+        activePhrase = game.getRandomPhrase();
+        console.log(activePhrase);
+
+    };
 }
