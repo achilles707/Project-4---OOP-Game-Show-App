@@ -11,7 +11,7 @@ class Game {
 
     // add phrases to the array
     phrases = [
-        new Phrase("LIfe is like a box of chocolates"),
+        new Phrase("Life is like a box of chocolates"),
         new Phrase("Your gonna need a bigger boat"),
         new Phrase("May the Force be with you"),
         new Phrase("Toto, I've a feeling we're not in Kansas anymore"),
@@ -35,7 +35,7 @@ class Game {
     startGame() {
         document.getElementById('overlay').style.display = 'none ';
         activePhrase = game.getRandomPhrase();
-        console.log(activePhrase);
+        //console.log(activePhrase);
 
     };
 }

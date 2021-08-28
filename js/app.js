@@ -12,6 +12,5 @@ phrase.addPhraseToDisplay();
 // Tests that the game starts
 const game = new Game();
 game.startGame();
-console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
-
-
+console.log(game.activePhrase)
+//console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`);
