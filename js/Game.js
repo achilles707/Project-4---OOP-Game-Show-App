@@ -34,7 +34,7 @@ class Game {
     */
     startGame() {
         document.getElementById('overlay').style.display = 'none ';
-        activePhrase = game.getRandomPhrase();
+        this.activePhrase = this.getRandomPhrase();
         //console.log(activePhrase);
 
     };
