@@ -35,7 +35,6 @@ class Game {
     startGame() {
         document.getElementById('overlay').style.display = 'none ';
         this.activePhrase = this.getRandomPhrase();
-        //console.log(activePhrase);
-
+        this.activePhrase.addPhraseToDisplay();
     };
 }

@@ -5,23 +5,8 @@
 class Phrase {
     constructor(phrase) {
         this.phrase = phrase.toLowerCase();
-
+        
     }
-
-/*
-Step 6
-Switch gears for a moment and head to the Phrase class inside the Phrase.js file. 
-Inside the Phrase class, create a method called `addPhraseToDisplay()`.
-This method adds letter placeholders to the display when the game starts. Each letter is
-presented by an empty box, one list item for each letter. See the example_phrase_html.txt 
-file for an example of what the render HTML for a phrase should look like when the game 
-starts, including any `id` or `class` attributes needed. When the player correctly 
-guesses a letter, the empty box is replaced with the matched letter (see the 
-`showMatchedLetter()` method below).
-Make sure the phrase displayed on the screen uses the `letter` CSS class for letters 
-and the `space` CSS class for space.
-*/
-
 
     /**
     * Display phrase on game board
@@ -29,14 +14,12 @@ and the `space` CSS class for space.
 
     addPhraseToDisplay() {
         let phraseLetters = [];
-        const ulForLetters = document.getElementById('phrase').firstElementChild;
-
         phraseLetters = Array.from(this.phrase);
-        console.log(phraseLetters);
+
+        const ulForLetters = document.getElementById('phrase').firstElementChild;
 
         for(let i = 0; i < phraseLetters.length; i++) {
             let phraseDisplayHTML = document.createElement('li');
-            console.log(phraseLetters[i]);
 
             if(phraseLetters[i] === ' ') {
                 phraseDisplayHTML.className = 'space';
@@ -48,6 +31,52 @@ and the `space` CSS class for space.
                 ulForLetters.appendChild(phraseDisplayHTML);
             }
         }
+        return ulForLetters;
     }
+
+    /**
+    * Checks if pressed letter is in phrase
+    * @param (string) letter - Letter to check
+    */
+    checkLetter(letter) {
+        let phraseLetters = [];
+        phraseLetters = Array.from(this.phrase);
+        
+        document.addEventListener('keyup', (e) => {
+            for(let i=0; i<phraseLetters.length; i++) {
+                if(e.key == letter) {
+                    console.log('true');
+                    return true;
+                } else {
+                    console.log('false');
+                    return false;
+                } 
+            }
+        });
+    };
+
+    /**
+    * Displays passed letter on screen after a match is found
+    * @param (string) letter - Letter to display
+    */
+
+    showMatchedLetter(letter) {
+        let phraseLetters = [];
+        phraseLetters = Array.from(this.phrase);
+        let lettersToShow = [];
+        const ulForLetters = document.getElementById('phrase').firstElementChild;
+
+        for(let i=0; i<phraseLetters.length; i++) {
+            if (this.checkLetter(letter) == true) {
+                lettersToShow = document.getElementsByClassName(`${letter}`);
+                console.log(`Matched letter: ${lettersToShow}`);
+                //console.log(document.getElementsByClassName(`${phraseLetters[i]}`)[0]);
+            } else {
+                //console.log(`${letter} not in phrase`);
+            }
+        }   
+    };
+
+
 
 }
