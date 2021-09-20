@@ -62,19 +62,30 @@ class Phrase {
 
     showMatchedLetter(letter) {
         let phraseLetters = [];
-        phraseLetters = Array.from(this.phrase);
-        let lettersToShow = [];
-        const ulForLetters = document.getElementById('phrase').firstElementChild;
+        phraseLetters = Array.from(this.phrase);        
+        let lettersToShow = document.getElementsByClassName(`${letter}`)
+        
+        this.lettersToShow.forEach(letter => {
+            letter.classList.remove('hide');
+            letter.classList.add('show');
+        });
 
-        for(let i=0; i<phraseLetters.length; i++) {
+        /* function changeClass(letter) {
+            letter.classList.remove('hide');
+            letter.classList.add('show');
+        }
+
+        this.lettersToShow.forEach(changeClass(letter)); */
+        
+
+        /* for(let i=0; i<lettersToShow.length; i++) {
             if (this.checkLetter(letter) == true) {
-                lettersToShow = document.getElementsByClassName(`${letter}`);
-                console.log(`Matched letter: ${lettersToShow}`);
+                console.log(`Matched letter: ${lettersToShow[i]}`);
                 //console.log(document.getElementsByClassName(`${phraseLetters[i]}`)[0]);
             } else {
                 //console.log(`${letter} not in phrase`);
             }
-        }   
+        }    */
     };
 
 
