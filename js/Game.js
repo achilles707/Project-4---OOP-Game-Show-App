@@ -36,5 +36,43 @@ class Game {
         document.getElementById('overlay').style.display = 'none ';
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
+
+        console.log(typeof(typeof this.missed));
     };
+
+    /**
+    * Checks for winning move
+    * @return {boolean} True if game has been won, false if game wasn't won
+    */
+    checkForWin() {
+        let numOfLetters = document.getElementsByClassName('letter').length;
+        let numRevealed = document.getElementsByClassName('show').length;
+
+        //console.log(`Letters in phrase: ${numOfLetters}`);
+        //console.log(`Letters revealed: ${numRevealed}`);
+        if(numOfLetters === numRevealed) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    /**
+    * Increases the value of the missed property
+    * Removes a life from the scoreboard
+    * Checks if player has remaining lives and ends game if player is out
+    */
+    removeLife() {
+        this.missed += 1;
+        let lifeDisplay = document.getElementsByTagName('ol')[0];  
+        console.log(typeof(typeof this.missed));
+
+        if(this.missed === 5) {
+            document.getElementById('overlay').style.display = 'lose ';
+        }
+        
+        lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
+        console.log(typeof(typeof this.missed));  // missed is NaN for some reason
+    };
+
 }

@@ -65,7 +65,12 @@ class Phrase {
         phraseLetters = Array.from(this.phrase);        
         let lettersToShow = document.getElementsByClassName(`${letter}`)
         
-        this.lettersToShow.forEach(letter => {
+        /* this.lettersToShow.forEach(letter => {
+            letter.classList.remove('hide');
+            letter.classList.add('show');
+        }); */
+
+        Array.from(document.getElementsByClassName(`${letter}`)).forEach(letter => {
             letter.classList.remove('hide');
             letter.classList.add('show');
         });
