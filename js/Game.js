@@ -3,21 +3,32 @@
  * Game.js */
 
 class Game {
-    constructor(phrase) {
-        let missed = 0;
+    constructor() {
+        this.missed = 0;
+        this.phrases = [
+            new Phrase("Life is like a box of chocolates"),
+            new Phrase("Your gonna need a bigger boat"),
+            new Phrase("May the Force be with you"),
+            new Phrase("Toto, I've a feeling we're not in Kansas anymore"),
+            new Phrase("Why so serious"),
+            new Phrase("To infinity and beyond")
+        ];
+        this.activePhrase = null;
+
+        /* let missed = 0;
         let phrases = [];
-        let activePhrase = null;
+        let activePhrase = null; */
     }
 
     // add phrases to the array
-    phrases = [
+    /* phrases = [
         new Phrase("Life is like a box of chocolates"),
         new Phrase("Your gonna need a bigger boat"),
         new Phrase("May the Force be with you"),
         new Phrase("Toto, I've a feeling we're not in Kansas anymore"),
         new Phrase("Why so serious"),
         new Phrase("To infinity and beyond")
-    ]
+    ] */
 
     /**
     * Selects random phrase from phrases property
@@ -26,6 +37,7 @@ class Game {
     getRandomPhrase() {
         let randomPhrase = this.phrases[Math.floor(Math.random()*this.phrases.length)];
 
+        console.log(randomPhrase); 
         return randomPhrase;
     };    
 
@@ -36,8 +48,6 @@ class Game {
         document.getElementById('overlay').style.display = 'none ';
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
-
-        console.log(typeof(typeof this.missed));
     };
 
     /**
@@ -65,14 +75,16 @@ class Game {
     removeLife() {
         this.missed += 1;
         let lifeDisplay = document.getElementsByTagName('ol')[0];  
-        console.log(typeof(typeof this.missed));
+        console.log(this.missed);
 
-        if(this.missed === 5) {
+        if(this.missed === 5) { //  
+            lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
+            console.log("Game Lost");
             document.getElementById('overlay').style.display = 'lose ';
+        } else {
+            lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
         }
         
-        lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
-        console.log(typeof(typeof this.missed));  // missed is NaN for some reason
     };
 
 }

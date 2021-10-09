@@ -14,5 +14,6 @@ phrase.addPhraseToDisplay();
 game.startGame();
 console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`); */
 
+// Tests that start button starts game
 const game = new Game();
 document.getElementById("btn__reset").addEventListener('click', function(){game.startGame()});
