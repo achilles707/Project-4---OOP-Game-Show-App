@@ -46,6 +46,7 @@ class Game {
     */
     startGame() {
         document.getElementById('overlay').style.display = 'none ';
+        console.log();
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
     };
@@ -57,14 +58,17 @@ class Game {
     checkForWin() {
         let numOfLetters = document.getElementsByClassName('letter').length;
         let numRevealed = document.getElementsByClassName('show').length;
+        let gameWon = false;
 
         //console.log(`Letters in phrase: ${numOfLetters}`);
         //console.log(`Letters revealed: ${numRevealed}`);
         if(numOfLetters === numRevealed) {
-            return true;
+            gameWon = true;
         } else {
-            return false;
+            gameWon = false;
         }
+
+        return gameWon;
     };
 
     /**
@@ -77,14 +81,30 @@ class Game {
         let lifeDisplay = document.getElementsByTagName('ol')[0];  
         console.log(this.missed);
 
-        if(this.missed === 5) { //  
+        if(this.missed === 5) { // 
             lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
+            this.gameOver(gameWon);
             console.log("Game Lost");
-            document.getElementById('overlay').style.display = 'lose ';
+            
         } else {
             lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
         }
         
     };
 
-}
+    /**
+    * Displays game over message
+    * @param {boolean} gameWon - Whether or not the user won the game
+    */
+    gameOver(gameWon) {
+        if(!gameWon) {
+            document.getElementById('game-over-message').innerHTML = 'Sorry, better luck next time!';
+            document.getElementById('overlay').style.display = '';
+            document.getElementById('overlay').classList.add('lose');
+        } else {
+            console.log('game won');
+        }
+    }
+        
+
+};      
