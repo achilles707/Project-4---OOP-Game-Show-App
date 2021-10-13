@@ -37,7 +37,7 @@ class Game {
     getRandomPhrase() {
         let randomPhrase = this.phrases[Math.floor(Math.random()*this.phrases.length)];
 
-        console.log(randomPhrase); 
+        // console.log(randomPhrase); 
         return randomPhrase;
     };    
 
@@ -46,7 +46,6 @@ class Game {
     */
     startGame() {
         document.getElementById('overlay').style.display = 'none ';
-        console.log();
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
     };
@@ -79,12 +78,12 @@ class Game {
     removeLife() {
         this.missed += 1;
         let lifeDisplay = document.getElementsByTagName('ol')[0];  
-        console.log(this.missed);
+        // console.log(this.missed);
 
         if(this.missed === 5) { // 
             lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
-            this.gameOver(gameWon);
-            console.log("Game Lost");
+            this.gameOver(false);
+            // console.log("Game Lost");
             
         } else {
             lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
@@ -97,14 +96,22 @@ class Game {
     * @param {boolean} gameWon - Whether or not the user won the game
     */
     gameOver(gameWon) {
-        if(!gameWon) {
+        document.getElementById('overlay').style.display = '';
+
+        if(gameWon === false) {
             document.getElementById('game-over-message').innerHTML = 'Sorry, better luck next time!';
-            document.getElementById('overlay').style.display = '';
             document.getElementById('overlay').classList.add('lose');
         } else {
-            console.log('game won');
+            document.getElementById('game-over-message').innerHTML = 'Great job!';
+            document.getElementById('overlay').classList.add('win');
         }
     }
-        
 
+    /**
+    * Handles onscreen keyboard button clicks
+    * @param (HTMLButtonElement) button - The clicked button element
+    */
+    handleInteraction(button) {
+        console.log(button);
+    };
 };      

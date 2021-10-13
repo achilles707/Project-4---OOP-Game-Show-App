@@ -17,3 +17,8 @@ console.log(`Active Phrase - phrase: ${game.activePhrase.phrase}`); */
 // Tests that start button starts game
 const game = new Game();
 document.getElementById("btn__reset").addEventListener('click', function(){game.startGame()});
+
+// Tests the handle interaction method
+Array.from(document.getElementsByClassName('key')).forEach(key => {
+    key.addEventListener('click', game.handleInteraction); // something funky
+});
