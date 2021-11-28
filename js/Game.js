@@ -112,6 +112,38 @@ class Game {
     * @param (HTMLButtonElement) button - The clicked button element
     */
     handleInteraction(button) {
-        console.log(button);
+        // console.log(button.innerHTML);
+        let letters = document.getElementsByClassName('letter');
+
+        // (e) => game.handleInteraction(e.target)
+
+        // Prevent user from selecting same letter twice
+        button.disabled = true;
+        console.log(`${button.innerHTML} button disabled`);
+        // If wrong choice, wrong class to button, remove life
+        if(this.activePhrase.checkLetter(button.innerHTML) == false) { // this.activePhrase.checkLetter(button.innerHTML) == false
+            console.log(`checkLetter for ${button.innerHTML} returned false`);
+
+            button.classList.add('wrong');
+            game.removeLife();
+            console.log('Life removed, and wrong class added');
+        } else { // If correct choice, chosen class to button, call showMatchedLetter(), checkForWin(), and if applicable gameOver()
+            button.classList.add('chosen');
+            this.activePhrase.showMatchedLetter(button.innerHTML);
+            console.log('chosen class added and matched letters revealed');
+        }
+
+
     };
 };      
+/* Handle Interaction pseudocode:
+create array "letters" which contains all the letter displays for the active phrase
+disables the button that has been clicked
+if 
+    (insert checkletter pseudocode:
+        creates array from the active phrase, for each letter, if it matches the passed letter
+        returns true, if not, returns false)
+    false: adds wrong class to the button, and removes a life
+    true: adds chosen class, and reveals any matched letter
+
+*/

@@ -41,18 +41,19 @@ class Phrase {
     checkLetter(letter) {
         let phraseLetters = [];
         phraseLetters = Array.from(this.phrase);
+
+        for(let i=0; i<phraseLetters.length; i++) {
+            if(phraseLetters[i] == letter) {
+                //console.log('true');
+                return true;
+            } else {
+                //console.log('false');
+                return false;
+            } 
+            
+        }
+        console.log('something happened');
         
-        document.addEventListener('keyup', (e) => {
-            for(let i=0; i<phraseLetters.length; i++) {
-                if(e.key == letter) {
-                    console.log('true');
-                    return true;
-                } else {
-                    console.log('false');
-                    return false;
-                } 
-            }
-        });
     };
 
     /**
@@ -83,14 +84,16 @@ class Phrase {
         this.lettersToShow.forEach(changeClass(letter)); */
         
 
-        /* for(let i=0; i<lettersToShow.length; i++) {
+        /* 
+        for(let i=0; i<lettersToShow.length; i++) {
             if (this.checkLetter(letter) == true) {
                 console.log(`Matched letter: ${lettersToShow[i]}`);
                 //console.log(document.getElementsByClassName(`${phraseLetters[i]}`)[0]);
             } else {
                 //console.log(`${letter} not in phrase`);
             }
-        }    */
+        }    
+        */
     };
 
 

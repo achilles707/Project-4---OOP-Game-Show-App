@@ -20,5 +20,5 @@ document.getElementById("btn__reset").addEventListener('click', function(){game.
 
 // Tests the handle interaction method
 Array.from(document.getElementsByClassName('key')).forEach(key => {
-    key.addEventListener('click', game.handleInteraction); // something funky
+    key.addEventListener('click', (e) => game.handleInteraction(e.target));
 });
