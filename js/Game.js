@@ -136,14 +136,3 @@ class Game {
 
     };
 };      
-/* Handle Interaction pseudocode:
-create array "letters" which contains all the letter displays for the active phrase
-disables the button that has been clicked
-if 
-    (insert checkletter pseudocode:
-        creates array from the active phrase, for each letter, if it matches the passed letter
-        returns true, if not, returns false)
-    false: adds wrong class to the button, and removes a life
-    true: adds chosen class, and reveals any matched letter
-
-*/
