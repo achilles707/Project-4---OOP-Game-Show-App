@@ -42,7 +42,13 @@ class Phrase {
         let phraseLetters = [];
         phraseLetters = Array.from(this.phrase);
 
-        for(let i=0; i<phraseLetters.length; i++) {
+        if(phraseLetters.includes(letter)) {
+            return true;
+        } else {
+            return false;
+        }
+
+       /*  for(let i=0; i<phraseLetters.length; i++) {
             if(phraseLetters[i] == letter) {
                 //console.log('true');
                 return true;
@@ -51,7 +57,7 @@ class Phrase {
                 return false;
             } 
             
-        }
+        } */
         console.log('something happened');
         
     };

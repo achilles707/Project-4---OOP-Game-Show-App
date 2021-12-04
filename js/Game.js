@@ -9,7 +9,7 @@ class Game {
             new Phrase("Life is like a box of chocolates"),
             new Phrase("Your gonna need a bigger boat"),
             new Phrase("May the Force be with you"),
-            new Phrase("Toto, I've a feeling we're not in Kansas anymore"),
+            new Phrase("Toto Ive a feeling we're not in Kansas anymore"), // maybe later figure out how to deal with punctuation
             new Phrase("Why so serious"),
             new Phrase("To infinity and beyond")
         ];
@@ -101,10 +101,22 @@ class Game {
         if(gameWon === false) {
             document.getElementById('game-over-message').innerHTML = 'Sorry, better luck next time!';
             document.getElementById('overlay').classList.add('lose');
-        } else {
+        } else { 
             document.getElementById('game-over-message').innerHTML = 'Great job!';
             document.getElementById('overlay').classList.add('win');
         }
+    }
+
+    /**
+     * Resets game when finished
+     * @param  
+     */
+    resetGame() { // find out how to iterate over the phrase without using forEach/ or without parameter?
+       
+            document.getElementById('phrase').firstElementChild.removeChild(document.getElementById('phrase').firstElementChild.firstElementChild);
+        }
+    // document.getElementById('phrase').firstElementChild.removeChild(document.getElementById('phrase').firstElementChild.firstElementChild)
+
     }
 
     /**
@@ -114,6 +126,7 @@ class Game {
     handleInteraction(button) {
         // console.log(button.innerHTML);
         let letters = document.getElementsByClassName('letter');
+        console.log(letters);
 
         // (e) => game.handleInteraction(e.target)
 
@@ -131,8 +144,22 @@ class Game {
             button.classList.add('chosen');
             this.activePhrase.showMatchedLetter(button.innerHTML);
             console.log('chosen class added and matched letters revealed');
+
+            // check if game is won
+            if(this.checkForWin()) {
+                // console.log('Game won');
+                if(document.getElementById('phrase').firstElementChild.hasChildNodes()) {
+                    this.resetGame();
+                }
+                
+                this.gameOver(true);
+            }
         }
+            
+
+    }
 
 
     };
 };      
+
