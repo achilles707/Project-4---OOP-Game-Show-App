@@ -136,25 +136,25 @@ class Game {
         console.log(`${button.innerHTML} button disabled`);
         // If wrong choice, wrong class to button, remove life
         if(this.activePhrase.checkLetter(button.innerHTML) == false) { // this.activePhrase.checkLetter(button.innerHTML) == false
-            console.log(`checkLetter for ${button.innerHTML} returned false`);
+            //console.log(`checkLetter for ${button.innerHTML} returned false`);
 
             button.classList.add('wrong');
             game.removeLife();
-            console.log('Life removed, and wrong class added');
+            //console.log('Life removed, and wrong class added');
         } else { // If correct choice, chosen class to button, call showMatchedLetter(), checkForWin(), and if applicable, gameOver()
             button.classList.add('chosen');
             this.activePhrase.showMatchedLetter(button.innerHTML);
-            console.log('chosen class added and matched letters revealed');
+            //console.log('chosen class added and matched letters revealed');
         } 
 
-         // reset if game is over
-         if(this.checkForWin()) {
+        // reset if game is over
+        if(this.checkForWin()) {
             // console.log('Game won');
            if(document.getElementById('phrase').hasChildNodes()) {
                 this.resetGame();
-           }
-            
+           } else {
             this.gameOver(true);
+           }
         }
 
 
