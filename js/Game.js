@@ -9,7 +9,7 @@ class Game {
             new Phrase("Life is like a box of chocolates"),
             new Phrase("Your gonna need a bigger boat"),
             new Phrase("May the Force be with you"),
-            new Phrase("Toto Ive a feeling we're not in Kansas anymore"), // maybe later figure out how to deal with punctuation
+            new Phrase("Toto Ive a feeling were not in Kansas anymore"), // maybe later figure out how to deal with punctuation
             new Phrase("Why so serious"),
             new Phrase("To infinity and beyond")
         ];
@@ -98,7 +98,7 @@ class Game {
     gameOver(gameWon) {
         document.getElementById('overlay').style.display = '';
 
-        if(gameWon === false) {
+        if(gameWon === false) { 
             document.getElementById('game-over-message').innerHTML = 'Sorry, better luck next time!';
             document.getElementById('overlay').classList.add('lose');
         } else { 
@@ -112,7 +112,8 @@ class Game {
      * @param  
      */
     resetGame() { // find out how to iterate over the phrase without using forEach/ or without parameter?
-       
+        if(document.getElementById('phrase').firstElementChild.hasChildNodes()) {
+            console.log(document.getElementById('phrase').firstElementChild.removeChild(document.getElementById('phrase').firstElementChild.firstElementChild));
             document.getElementById('phrase').firstElementChild.removeChild(document.getElementById('phrase').firstElementChild.firstElementChild);
         }
     // document.getElementById('phrase').firstElementChild.removeChild(document.getElementById('phrase').firstElementChild.firstElementChild)
@@ -126,7 +127,7 @@ class Game {
     handleInteraction(button) {
         // console.log(button.innerHTML);
         let letters = document.getElementsByClassName('letter');
-        console.log(letters);
+        // console.log(letters);
 
         // (e) => game.handleInteraction(e.target)
 
@@ -140,26 +141,22 @@ class Game {
             button.classList.add('wrong');
             game.removeLife();
             console.log('Life removed, and wrong class added');
-        } else { // If correct choice, chosen class to button, call showMatchedLetter(), checkForWin(), and if applicable gameOver()
+        } else { // If correct choice, chosen class to button, call showMatchedLetter(), checkForWin(), and if applicable, gameOver()
             button.classList.add('chosen');
             this.activePhrase.showMatchedLetter(button.innerHTML);
             console.log('chosen class added and matched letters revealed');
+        } 
 
-            // check if game is won
-            if(this.checkForWin()) {
-                // console.log('Game won');
-                if(document.getElementById('phrase').firstElementChild.hasChildNodes()) {
-                    this.resetGame();
-                }
-                
-                this.gameOver(true);
-            }
-        }
+         // reset if game is over
+         if(this.checkForWin()) {
+            // console.log('Game won');
+           if(document.getElementById('phrase').hasChildNodes()) {
+                this.resetGame();
+           }
             
-
-    }
+            this.gameOver(true);
+        }
 
 
     };
 };      
-
