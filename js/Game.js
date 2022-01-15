@@ -77,16 +77,21 @@ class Game {
     */
     removeLife() {
         this.missed += 1;
-        let lifeDisplay = document.getElementsByTagName('ol')[0];  
+        let lifeDisplay1 = document.getElementsByTagName('ol')[0];
+        const lostHeart = `<li class="tries">
+                                <img src="images/lostHeart.png" alt="lost heart icon">
+                            </li>`;  
         // console.log(this.missed);
 
         if(this.missed === 5) { // 
-            lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
+            lifeDisplay1.lastElementChild.parentNode.removeChild(lifeDisplay1.lastElementChild);
             this.gameOver(false);
+            this.resetGame();
             // console.log("Game Lost");
             
         } else {
-            lifeDisplay.lastElementChild.parentNode.removeChild(lifeDisplay.lastElementChild);
+            lifeDisplay1.lastElementChild.parentNode.removeChild(lifeDisplay1.lastElementChild);
+            //lifeDisplay1.firstElementChild.insertAdjacentHTML('beforeend', lostHeart); // different size, wrong spot
         }
         
     };
@@ -111,13 +116,28 @@ class Game {
      * Resets game when finished
      * @param  
      */
-    resetGame() { // find out how to iterate over the phrase without using forEach/ or without parameter?
-        if(document.getElementById('phrase').firstElementChild.hasChildNodes()) {
-            console.log(document.getElementById('phrase').firstElementChild.removeChild(document.getElementById('phrase').firstElementChild.firstElementChild));
-            document.getElementById('phrase').firstElementChild.removeChild(document.getElementById('phrase').firstElementChild.firstElementChild);
-        }
-    // document.getElementById('phrase').firstElementChild.removeChild(document.getElementById('phrase').firstElementChild.firstElementChild)
 
+    resetGame() {
+        // reset the phrase
+        const phraseUl = document.getElementById('phrase').firstElementChild;
+        const heart = `<li class="tries">
+                            <img src="images/liveHeart.png" alt="heart icon"></img>
+                        </li>`;
+
+        while(phraseUl.hasChildNodes()){
+          phraseUl.removeChild(phraseUl.firstElementChild);
+        }
+        // reset the buttons
+        Array.from(document.getElementsByClassName('key')).forEach(key => {
+            key.classList.remove('wrong');
+            key.classList.remove('chosen');
+            key.disabled = false;
+        });
+        // reset lives
+        this.missed = 0;
+        let lifeDisplay2 = document.getElementsByTagName('ol')[0];
+        lifeDisplay2.insertAdjacentHTML('afterbegin', heart);
+        
     }
 
     /**
@@ -139,7 +159,7 @@ class Game {
             //console.log(`checkLetter for ${button.innerHTML} returned false`);
 
             button.classList.add('wrong');
-            game.removeLife();
+            this.removeLife();
             //console.log('Life removed, and wrong class added');
         } else { // If correct choice, chosen class to button, call showMatchedLetter(), checkForWin(), and if applicable, gameOver()
             button.classList.add('chosen');
@@ -148,13 +168,9 @@ class Game {
         } 
 
         // reset if game is over
-        if(this.checkForWin()) {
-            // console.log('Game won');
-           if(document.getElementById('phrase').hasChildNodes()) {
-                this.resetGame();
-           } else {
+        if(this.checkForWin() == true) {
             this.gameOver(true);
-           }
+            this.resetGame();
         }
 
 
