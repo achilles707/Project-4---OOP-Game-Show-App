@@ -1,3 +1,14 @@
+/* Comments for Steven:
+    Thanks for being willing to take a look at my project!
+    The issues that I am running into are twp-fold:
+    First, when the user makes an incorrect guess, after removing one heart, I am supposed to replace it with the "lost-heart.png" icon
+    Second, I cannot figure out how to reset the heart icons when the game resets
+    The code that relates to these issues can be found in:
+        removeLife() lines 88-107
+        resetGame() lines 131-157
+
+*/
+
 /* Treehouse FSJS Techdegree
  * Project 4 - OOP Game App
  * Game.js */
@@ -54,7 +65,7 @@ class Game {
     * Checks for winning move
     * @return {boolean} True if game has been won, false if game wasn't won
     */
-    checkForWin() {
+    checkForWin() { 
         let numOfLetters = document.getElementsByClassName('letter').length;
         let numRevealed = document.getElementsByClassName('show').length;
         let gameWon = false;
@@ -121,11 +132,12 @@ class Game {
         // reset the phrase
         const phraseUl = document.getElementById('phrase').firstElementChild;
         const heart = `<li class="tries">
-                            <img src="images/liveHeart.png" alt="heart icon"></img>
+                            <img src="images/liveHeart.png" alt="heart icon" height="35" width="30"></img>  
                         </li>`;
 
         while(phraseUl.hasChildNodes()){
           phraseUl.removeChild(phraseUl.firstElementChild);
+          console.log(phraseUl.firstElementChild);
         }
         // reset the buttons
         Array.from(document.getElementsByClassName('key')).forEach(key => {
@@ -136,7 +148,11 @@ class Game {
         // reset lives
         this.missed = 0;
         let lifeDisplay2 = document.getElementsByTagName('ol')[0];
-        lifeDisplay2.insertAdjacentHTML('afterbegin', heart);
+        //console.log(lifeDisplay2.length);
+        // loop over the hearts and replace them with the live-heart image
+        //for() {
+
+        //}
         
     }
 
@@ -149,14 +165,11 @@ class Game {
         let letters = document.getElementsByClassName('letter');
         // console.log(letters);
 
-        // (e) => game.handleInteraction(e.target)
-
         // Prevent user from selecting same letter twice
         button.disabled = true;
         console.log(`${button.innerHTML} button disabled`);
         // If wrong choice, wrong class to button, remove life
-        if(this.activePhrase.checkLetter(button.innerHTML) == false) { // this.activePhrase.checkLetter(button.innerHTML) == false
-            //console.log(`checkLetter for ${button.innerHTML} returned false`);
+        if(this.activePhrase.checkLetter(button.innerHTML) == false) { 
 
             button.classList.add('wrong');
             this.removeLife();
